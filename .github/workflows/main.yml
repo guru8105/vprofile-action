@@ -29,15 +29,15 @@ jobs:
 
       - name: SonarQube Scan
         run: sonar-scanner
-          -Dsonar.projectKey=vprofile
-          -Dsonar.organization=devops
-          -Dsonar.host.url=XXXXXXXXXXXXXXXXXXXXX
-          -Dsonar.login=4f6e9d9b2e5d4e1c5d0f3d3e9f3e1c5d0f3d3e9f3e1c5d0f3d3e9f3e1c5d0f3d
+          -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+          -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
+          -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
           -Dsonar.sources=src/
           -Dsonar.junit.reportPaths=target/surefire-reports/
-          -Dsonar.jacoco.reportPaths=target/site/jacoco/jacoco.xml
-          -Dsonar.java.binaries=target/classes
-          -Dsonar.java.checkstyle.reportPaths=target/site/checkstyle.xml
+          -Dsonar.jacoco.reportPaths=target/jacoco.exec
+          -Dsonar.java.binaries=target/test-classes/com/visualpathit/account
+          -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml
 
       - name: sonarqube quality gate checkout
         id: sonarqube-quality-gate-checkout
